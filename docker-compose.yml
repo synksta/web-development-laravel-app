@@ -1,0 +1,15 @@
+services:
+    db:
+        image: postgres:latest
+        ports:
+            - "5432:5432" # Проброс порта для доступа извне
+        restart: always # Перезапуск контейнера при сбоях
+        environment:
+            POSTGRES_USER: synksta # Укажите имя пользователя
+            POSTGRES_PASSWORD: stopeatingdb # Укажите пароль
+            POSTGRES_DB: laravel_app # Укажите имя базы данных
+        volumes:
+            - postgres_data:/var/lib/postgresql/data # Хранение данных
+
+volumes:
+    postgres_data: # Определение тома для постоянного хранения данных
