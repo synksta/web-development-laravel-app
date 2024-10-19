@@ -12,11 +12,6 @@ class MainController extends Controller
 {
     public function index()
     {
-        // dd(Str::slug('привет мир'));
-        // Tag::create(['title' => 'привет мир']);
-        $tag = new Tag();
-        $tag->title = 'привет мир';
-        $tag->save();
         return view('admin.index');
     }
 }
