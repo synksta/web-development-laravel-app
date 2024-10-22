@@ -35,7 +35,6 @@ class CategoryController extends Controller
         // $request->validate([
         //     'title' => 'required',
         // ]);
-
         Category::create($request->all());
         // $request->session()->flash('success', 'Category created successfully');
         return redirect(route('categories.index'))->with('success', 'Category created successfully');
