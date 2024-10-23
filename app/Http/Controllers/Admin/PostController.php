@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditPost;
 use App\Http\Requests\StorePost;
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -24,7 +26,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::pluck('title', 'id')->all;
+        $tags = Tag::pluck('title', 'id')->all;
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
