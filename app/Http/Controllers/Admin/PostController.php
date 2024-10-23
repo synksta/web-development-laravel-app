@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EditPost;
+use App\Http\Requests\StorePost;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +15,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::paginate(20);
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -20,15 +24,15 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePost $request)
     {
-        //
+        return redirect(route('posts.index'))->with('success', 'Post created successfully');
     }
 
     /**
@@ -44,13 +48,13 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.posts.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditPost $request, string $id)
     {
         //
     }
