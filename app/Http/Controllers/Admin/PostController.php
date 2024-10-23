@@ -37,7 +37,14 @@ class PostController extends Controller
     public function store(StorePost $request)
     {
 
-        dd($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('thumbnail')) {
+            $folder = date('Y-m-d');
+            $filePath = $request->file('thumbnail')->store("images/{$folder}");
+        }
+
+        $post = Post::create($data);
 
         return redirect(route('posts.index'))->with('success', 'Post created successfully');
     }
