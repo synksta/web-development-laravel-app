@@ -36,6 +36,9 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
+
+        dd($request->all());
+
         return redirect(route('posts.index'))->with('success', 'Post created successfully');
     }
 
