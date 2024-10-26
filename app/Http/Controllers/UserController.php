@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    // Register
     public function register_form()
     {
         return view('user.register');
@@ -25,5 +26,24 @@ class UserController extends Controller
         session()->flash('success', 'User created successfully');
         Auth::login($user);
         return redirect()->route('home');
+    }
+    // Login
+    public function login_form()
+    {
+        return view('user.login');
+    }
+
+    public function login_submit(StoreUser $request)
+    {
+
+        session()->flash('success', 'User logged in successfully');
+        // Auth::login($user);
+        return redirect()->route('home');
+    }
+    // Logout
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login.form');
     }
 }
