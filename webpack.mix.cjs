@@ -1,5 +1,29 @@
 const mix = require("laravel-mix");
 
+// const BrowserSyncPlugin = require("browser-sync-webpack-plugin");
+
+// mix.js("resources/js/app.js", "public/js")
+//     // .sass("resources/sass/app.scss", "public/css")
+//     .version()
+//     .sourceMaps()
+//     .webpackConfig({
+//         plugins: [
+//             new BrowserSyncPlugin(
+//                 {
+//                     proxy: "http://localhost:8000", // Убедитесь, что это ваш URL
+//                     files: [
+//                         "**/*.php",
+//                         "public/**/*.{css,js,jpg,jpeg,png,gif,svg}",
+//                     ],
+//                     reloadDelay: 1000,
+//                 },
+//                 {
+//                     reload: false,
+//                 }
+//             ),
+//         ],
+//     });
+
 mix.styles(
     [
         "resources/assets/admin/plugins/fontawesome-free/css/all.min.css",
@@ -33,4 +57,4 @@ mix.copyDirectory("resources/assets/admin/img", "public/assets/admin/img");
 //     "public/assets/admin/css/adminlte.min.css.map"
 // );
 
-mix.browserSync("localhost:8000");
+mix.browserSync("http://localhost:8000/");

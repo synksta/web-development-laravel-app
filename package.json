@@ -14,6 +14,9 @@
         "axios": "*",
         "browser-sync": "*",
         "browser-sync-webpack-plugin": "*",
-        "laravel-mix": "*"
+        "laravel-mix": "*",
+        "resolve-url-loader": "^5.0.0",
+        "sass": "^1.80.4",
+        "sass-loader": "^12.6.0"
     }
 }
