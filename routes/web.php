@@ -25,4 +25,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'],
 });
 
 Route::get('/register', [UserController::class, 'create'])->name('register.create');
+Route::redirect('/registration', '/register');
+Route::redirect('/signup', '/register');
+
 Route::post('/register', [UserController::class, 'store'])->name('register.store');
