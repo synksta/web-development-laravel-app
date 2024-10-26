@@ -29,7 +29,7 @@
           @endif
 
           @if (session()->has('success'))
-          <div class="alert alert-sucsess">
+          <div class="alert alert-success">
             {{ session('success') }}
           </div>
           @endif
@@ -86,7 +86,7 @@
           </div>
         </form>
 
-        <a href="#" class="mt-3 btn btn-default btn-block">I already have a membership</a>
+        <a href="{{route('login')}}" class="mt-3 btn btn-default btn-block">I already have a membership</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->

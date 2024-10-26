@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>New user</title>
+  <title>Login</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -29,8 +29,14 @@
           @endif
 
           @if (session()->has('success'))
-          <div class="alert alert-sucsess">
+          <div class="alert alert-success">
             {{ session('success') }}
+          </div>
+          @endif
+
+          @if (session()->has('error'))
+          <div class="alert alert-danger">
+            {{ session('error') }}
           </div>
           @endif
         </div>
@@ -44,15 +50,6 @@
 
         <form action="{{ route('register.submit')}}" method="post">
           @csrf
-          <!-- Name -->
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" name="name" placeholder="Name" value="{{ old('name') }}">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
           <!-- Email -->
           <div class="input-group mb-3">
             <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
@@ -71,22 +68,13 @@
               </div>
             </div>
           </div>
-          <!-- Retype password -->
-          <div class="input-group mb-3">
-            <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
-          </div>
           <!-- Submit button -->
           <div class="row">
-            <button type="submit" class="mx-2 btn btn-primary btn-block">Register</button>
+            <button type="submit" class="mx-2 btn btn-primary btn-block">Login</button>
           </div>
         </form>
 
-        <a href="#" class="mt-3 btn btn-default btn-block">I already have a membership</a>
+        <a href="{{route('register')}}" class="mt-3 btn btn-default btn-block">I don't have a membership</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
