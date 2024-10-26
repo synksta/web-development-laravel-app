@@ -14,18 +14,40 @@
 
 <body class="hold-transition register-page">
   <div class="register-box">
+
+    <div class="container mt-2">
+      <div class="row">
+        <div class="col-12">
+          @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul class="list-unstyled">
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
+
+          @if (session()->has('success'))
+          <div class="alert alert-sucsess">
+            {{ session('success') }}
+          </div>
+          @endif
+        </div>
+      </div>
+    </div>
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="../../index2.html" class="h1"><b>synksta</b>WEB</a>
+        <a href="{{route('home')}}" class="h1"><b>synksta</b>WEB</a>
       </div>
-      <div class="card-body">
+      <div class=" card-body">
 
         <form action="{{ route('register.store')}}" method="post">
           @csrf
 
           <!-- Name -->
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="name" placeholder="Name">
+            <input type="text" class="form-control" name="name" placeholder="Name" value="{{ old('name') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -34,7 +56,7 @@
           </div>
           <!-- Email -->
           <div class="input-group mb-3">
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -52,7 +74,7 @@
           </div>
           <!-- Retype password -->
           <div class="input-group mb-3">
-            <input type="password_confirmation" class="form-control" placeholder="Retype password">
+            <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -65,7 +87,7 @@
           </div>
         </form>
 
-        <a href="#" class="text-center">I already have a membership</a>
+        <a href="#" class="mt-3 btn btn-default btn-block">I already have a membership</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->
