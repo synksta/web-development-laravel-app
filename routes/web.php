@@ -34,3 +34,6 @@ Route::redirect('/auth', '/login');
 Route::redirect('/authentication', '/login');
 Route::redirect('/authorization', '/login');
 Route::post('/login', [UserController::class, 'login_submit'])->name('login.submit');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::redirect('/quit', '/logout');
