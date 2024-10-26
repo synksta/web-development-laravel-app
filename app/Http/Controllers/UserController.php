@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function create()
+    public function register_form()
     {
-        return view('user.create');
+        return view('user.register');
     }
 
-    public function store(StoreUser $request)
+    public function register_submit(StoreUser $request)
     {
         $user = User::create([
             'name' => $request->name,

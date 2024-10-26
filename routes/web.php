@@ -24,8 +24,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'],
 
 });
 
-Route::get('/register', [UserController::class, 'create'])->name('register.create');
+Route::get('/register', [UserController::class, 'register_form'])->name('register.form');
 Route::redirect('/registration', '/register');
 Route::redirect('/signup', '/register');
+Route::post('/register', [UserController::class, 'register_submit'])->name('register.submit');
 
-Route::post('/register', [UserController::class, 'store'])->name('register.store');
+Route::get('/login', [UserController::class, 'login_form'])->name('login.form');
+Route::redirect('/auth', '/login');
+Route::redirect('/authentication', '/login');
+Route::redirect('/authorization', '/login');
+Route::post('/login', [UserController::class, 'login_submit'])->name('login.submit');

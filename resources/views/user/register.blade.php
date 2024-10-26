@@ -42,9 +42,8 @@
       </div>
       <div class=" card-body">
 
-        <form action="{{ route('register.store')}}" method="post">
+        <form action="{{ route('register.submit')}}" method="post">
           @csrf
-
           <!-- Name -->
           <div class="input-group mb-3">
             <input type="text" class="form-control" name="name" placeholder="Name" value="{{ old('name') }}">
