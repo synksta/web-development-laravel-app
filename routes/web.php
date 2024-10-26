@@ -8,8 +8,8 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
 
 Route::get('/', function () {
-    // return view('welcome');
-    return "это главная";
+    return view('welcome');
+    // return "это главная";
 })->name('home');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'App\Http\Controllers\Admin'], function () {
