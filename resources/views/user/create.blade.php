@@ -8,12 +8,8 @@
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css?v=3.2.0">
+  <link rel="stylesheet" href="{{asset('assets/admin/css/admin.css')}}">
+
 </head>
 
 <body class="hold-transition register-page">
@@ -93,12 +89,8 @@
   </div>
   <!-- /.register-box -->
 
-  <!-- jQuery -->
-  <script src="../../plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="../../dist/js/adminlte.min.js?v=3.2.0"></script>
+  <script src="{{asset('assets/admin/js/admin.js')}}"></script>
+
 </body>
 
 </html>
