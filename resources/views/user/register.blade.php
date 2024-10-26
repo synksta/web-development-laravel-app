@@ -86,7 +86,7 @@
           </div>
         </form>
 
-        <a href="{{route('login')}}" class="mt-3 btn btn-default btn-block">I already have a membership</a>
+        <a href="{{route('login.form')}}" class="mt-3 btn btn-default btn-block">I already have a membership</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->

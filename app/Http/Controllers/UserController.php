@@ -14,7 +14,7 @@ class UserController extends Controller
     public function register_form()
     {
         if (Auth::check()) {
-            return redirect()->back()->with('error', 'You are already logged in');
+            return redirect()->back()->with('error', 'You are already logged in as ' . Auth::user()->name);
         }
         return view('user.register');
     }
@@ -35,7 +35,7 @@ class UserController extends Controller
     public function login_form()
     {
         if (Auth::check()) {
-            return redirect()->back()->with('error', 'You are already logged in');
+            return redirect()->back()->with('error', 'You are already logged in as ' . Auth::user()->name);
         }
         return view('user.login');
     }

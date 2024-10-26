@@ -48,7 +48,7 @@
       </div>
       <div class=" card-body">
 
-        <form action="{{ route('register.submit')}}" method="post">
+        <form action="{{ route('login.submit')}}" method="post">
           @csrf
           <!-- Email -->
           <div class="input-group mb-3">
@@ -74,7 +74,7 @@
           </div>
         </form>
 
-        <a href="{{route('register')}}" class="mt-3 btn btn-default btn-block">I don't have a membership</a>
+        <a href="{{route('register.form')}}" class="mt-3 btn btn-default btn-block">I don't have a membership</a>
       </div>
       <!-- /.form-box -->
     </div><!-- /.card -->

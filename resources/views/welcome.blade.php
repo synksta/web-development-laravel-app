@@ -16,10 +16,15 @@
 
 </head>
 
-<body class="font-sans antialiased dark:bg-black dark:text-white/50">
+<body class="font-sans antialiased bg-black text-white/50">
     @if (session()->has('success'))
     <div class="alert alert-success">
         {{ session()->get('success') }}
+    </div>
+    @endif
+    @if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
     </div>
     @endif
 </body>
