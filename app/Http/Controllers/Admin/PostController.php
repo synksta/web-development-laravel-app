@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -36,17 +37,18 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-
         $data = $request->all();
 
-        if ($request->hasFile('thumbnail')) {
-            $folder = date('Y-m-d');
-            $filePath = $request->file('thumbnail')->store("images/{$folder}");
-        }
+        $data['thumbnail'] = Post::uploadThumbnail($request, new Post());
 
+        // dd($data);
         $post = Post::create($data);
 
-        $post->tags()->attach($data['tags']);
+        $post->update($data);
+
+        // dd($data['thumbnail']);
+
+        $post->tags()->sync($request->tags);
 
         return redirect(route('posts.index'))->with('success', 'Post created successfully');
     }
@@ -64,7 +66,10 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.posts.edit');
+        $post = Post::findOrFail($id);
+        $categories = Category::pluck('title', 'id')->all();
+        $tags = Tag::pluck('title', 'id')->all();
+        return view('admin.posts.edit', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -72,7 +77,17 @@ class PostController extends Controller
      */
     public function update(EditPost $request, string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $data = $request->all();
+
+        $data['thumbnail'] = Post::uploadThumbnail($request, $post);
+
+        $post->update($data);
+
+        $post->tags()->sync($request->tags);
+
+        return redirect(route('posts.index'))->with('success', 'Post updated successfully');
     }
 
     /**
@@ -80,6 +95,12 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->tags()->sync([]);
+        if ($post->thumbnail) {
+            Storage::delete($post->thumbnail);
+        }
+        $post->delete();
+        return redirect(route('posts.index'))->with('success', 'Post deleted successfully');
     }
 }

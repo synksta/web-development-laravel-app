@@ -8,7 +8,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Posts</h1>
+        <h1>New post</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -29,6 +29,8 @@
     <form role="form" method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
       @csrf
       <div class="card-body">
+
+        <!-- Title -->
         <div class="form-group">
           <label for="title">Title</label>
           <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Call the post">

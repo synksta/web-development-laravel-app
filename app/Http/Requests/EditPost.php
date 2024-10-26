@@ -22,7 +22,11 @@ class EditPost extends FormRequest
     public function rules(): array
     {
         return [
+            'category_id' => 'required|integer|exists:categories,id',
+            'title' => 'required',
+            'description' => 'required',
             'content' => 'required',
+            'thumbnail' => 'nullable|image',
         ];
     }
 }
