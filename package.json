@@ -12,12 +12,11 @@
     },
     "devDependencies": {
         "axios": "*",
-        "browser-sync": "*",
-        "browser-sync-webpack-plugin": "*",
+        "browser-sync": "^3.0.3",
         "laravel-mix": "*",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.80.4",
-        "sass-loader": "^12.6.0"
+        "sass-loader": "^16.0.2"
     },
     "dependencies": {
         "@toast-ui/editor": "^3.2.2"
