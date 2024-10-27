@@ -37,6 +37,8 @@
       </div>
     </div>
     <div class="card-body">
+      <div id="editor"></div>
+
       Start creating your amazing application!
       This is a section.
     </div>

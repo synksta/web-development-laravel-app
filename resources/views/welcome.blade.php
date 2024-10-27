@@ -10,7 +10,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('assets/admin/css/admin.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
+    <!-- <link href="https://uicdn.toast.com/editor/latest/toastui-editor.css" rel="stylesheet"> -->
+    <!-- <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script> -->
+
 
 
 </head>
@@ -53,9 +56,9 @@
         </div>
     </nav>
 
-    <div id="editor"></div>
-
-
+    <!-- 
+    <script src="{{mix('assets/admin/js/script.js')}}"></script>
+    <script src="{{mix('assets/admin/js/manifest.js')}}"></script> -->
 </body>
 
 </html>

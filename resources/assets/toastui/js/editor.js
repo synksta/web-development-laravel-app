@@ -1,10 +1,13 @@
-import "@toast-ui/editor";
+const editorElement = document.querySelector("#editor");
 
-const editor = new Editor({
-    el: document.querySelector("#editor"),
-    height: "500px",
-    initialEditType: "markdown",
-    previewStyle: "vertical",
-});
+if (editorElement) {
+    console.log("editor");
+    const editor = new toastui.Editor({
+        el: editorElement,
+        height: "500px",
+        initialEditType: "markdown",
+        previewStyle: "vertical",
+    });
 
-editor.getMarkdown();
+    editor.getMarkdown();
+}
