@@ -46,7 +46,7 @@ class UserController extends Controller
             session()->flash('success', 'User logged in successfully');
 
             if (Auth::user()->is_admin) {
-                return redirect()->route('admin');
+                return redirect()->route('admin.');
             }
             return redirect()->route('home');
         }
@@ -55,7 +55,10 @@ class UserController extends Controller
     // Logout
     public function logout()
     {
-        Auth::logout();
-        return redirect()->route('login.form');
+        if (Auth::check()) {
+            Auth::logout();
+            return redirect()->route('login.form');
+        }
+        return redirect()->route('login.form')->with('error', 'You are not logged in');
     }
 }

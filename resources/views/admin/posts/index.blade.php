@@ -28,7 +28,7 @@
       <h3 class="card-title">Posts list</h3>
     </div>
     <div class="card-body">
-      <a href="{{ route('posts.create') }}" class="btn btn-success mb-3">Add new post</a>
+      <a href="{{ route('admin.posts.create') }}" class="btn btn-success mb-3">Add new post</a>
 
       @if (count($posts))
       <div class="table-responsive">

@@ -26,7 +26,7 @@
     <div class="card-header">
       <h3 class="card-title">Edit category - {{ $category->title }}</h3>
     </div>
-    <form role="form" method="post" action="{{ route('categories.update', ['category' => $category->id]) }}">
+    <form role="form" method="post" action="{{ route('admin.categories.update', ['category' => $category->id]) }}">
       @csrf
       @method('PUT')
       <div class="card-body">

@@ -26,7 +26,7 @@
     <div class="card-header">
       <h3 class="card-title">Edit tag - {{ $tag->title }}</h3>
     </div>
-    <form role="form" method="post" action="{{ route('tags.update', ['tag' => $tag->id]) }}">
+    <form role="form" method="post" action="{{ route('admin.tags.update', ['tag' => $tag->id]) }}">
       @csrf
       @method('PUT')
       <div class="card-body">

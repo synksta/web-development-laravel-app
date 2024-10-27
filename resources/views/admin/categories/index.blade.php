@@ -28,7 +28,7 @@
       <h3 class="card-title">Categories list</h3>
     </div>
     <div class="card-body">
-      <a href="{{ route('categories.create') }}" class="btn btn-success mb-3">Add new category</a>
+      <a href="{{ route('admin.categories.create') }}" class="btn btn-success mb-3">Add new category</a>
 
       @if (count($categories))
       <div class="table-responsive">
@@ -48,10 +48,10 @@
               <td>{{ $category->title }}</td>
               <td>{{ $category->slug }}</td>
               <td>
-                <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="btn btn-info btn-sm float-left mr-1`">
+                <a href="{{ route('admin.categories.edit', ['category' => $category->id]) }}" class="btn btn-info btn-sm float-left mr-1`">
                   <i class="fas fa-pencil-alt"></i>
                 </a>
-                <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" class="float-left ">
+                <form action="{{ route('admin.categories.destroy', ['category' => $category->id]) }}" method="post" class="float-left ">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">

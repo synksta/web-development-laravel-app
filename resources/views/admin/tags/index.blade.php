@@ -28,7 +28,7 @@
       <h3 class="card-title">Tags list</h3>
     </div>
     <div class="card-body">
-      <a href="{{ route('tags.create') }}" class="btn btn-success mb-3">Add new tag</a>
+      <a href="{{ route('admin.tags.create') }}" class="btn btn-success mb-3">Add new tag</a>
 
       @if (count($tags))
       <div class="table-responsive">
@@ -48,10 +48,10 @@
               <td>{{ $tag->title }}</td>
               <td>{{ $tag->slug }}</td>
               <td>
-                <a href="{{ route('tags.edit', ['tag' => $tag->id]) }}" class="btn btn-info btn-sm float-left mr-1`">
+                <a href="{{ route('admin.tags.edit', ['tag' => $tag->id]) }}" class="btn btn-info btn-sm float-left mr-1`">
                   <i class="fas fa-pencil-alt"></i>
                 </a>
-                <form action="{{ route('tags.destroy', ['tag' => $tag->id]) }}" method="post" class="float-left ">
+                <form action="{{ route('admin.tags.destroy', ['tag' => $tag->id]) }}" method="post" class="float-left ">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">

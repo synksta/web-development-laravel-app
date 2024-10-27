@@ -211,13 +211,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('categories.index') }}" class="nav-link">
+                  <a href="{{ route('admin.categories.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Categories List</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('categories.create') }}" class="nav-link">
+                  <a href="{{ route('admin.categories.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>New Category</p>
                   </a>
@@ -235,13 +235,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('tags.index') }}" class="nav-link">
+                  <a href="{{ route('admin.tags.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Tags List</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('tags.create') }}" class="nav-link">
+                  <a href="{{ route('admin.tags.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>New Tag</p>
                   </a>
@@ -259,13 +259,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('posts.index') }}" class="nav-link">
+                  <a href="{{ route('admin.posts.index') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Posts List</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('posts.create') }}" class="nav-link">
+                  <a href="{{ route('admin.posts.create') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>New Post</p>
                   </a>

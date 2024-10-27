@@ -26,7 +26,7 @@
     <div class="card-header">
       <h3 class="card-title">New tag</h3>
     </div>
-    <form role="form" method="post" action="{{ route('tags.store') }}">
+    <form role="form" method="post" action="{{ route('admin.tags.store') }}">
       @csrf
       <div class="card-body">
         <div class="form-group">
