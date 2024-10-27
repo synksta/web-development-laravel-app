@@ -8,6 +8,7 @@ use App\Http\Requests\StorePost;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,10 +40,16 @@ class PostController extends Controller
     {
         $data = $request->all();
 
+
+        // dd($data);
+
         $data['thumbnail'] = Post::uploadThumbnail($request, new Post());
 
         // dd($data);
         $post = Post::create($data);
+
+        // $data['description'] = Post::uploadPostImages($post, 'description');
+        // $data['content'] = Post::uploadPostImages($post, 'content');
 
         $post->update($data);
 
@@ -50,7 +57,24 @@ class PostController extends Controller
 
         $post->tags()->sync($request->tags);
 
-        return redirect(route('posts.index'))->with('success', 'Post created successfully');
+        Log::info($data);
+
+        return response()->json([
+            'id' => $post->id,
+            'title' => $data['title'],
+            'description' => $data['description'],
+            'content' => $data['content'],
+            'category_id' => $data['category_id'],
+            'tags' => $data['tags'],
+            'thumbnail' => $data['thumbnail'],
+        ], 200);
+
+        // if ($request->ajax()) {
+        //     return response()->json(['success' => true, 'message' => 'Post created successfully']);
+        // }
+
+        // // Если не AJAX-запрос, перенаправляем на индекс постов
+        // return redirect(route('admin.posts.index'))->with('success', 'Post created successfully');
     }
 
     /**

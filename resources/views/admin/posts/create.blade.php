@@ -1,6 +1,12 @@
 @extends('admin.layouts.layout')
 
 @section('content')
+
+@php
+Log::info("hi");
+@endphp
+
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 <!-- Content Wrapper. Contains page content -->
 <!-- <div class="content-wrapper"> -->
 <!-- Content Header (Page header) -->
@@ -26,7 +32,7 @@
     <div class="card-header">
       <h3 class="card-title">New post</h3>
     </div>
-    <form role="form" method="post" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
+    <form id="postForm" role="form" method="post" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
       @csrf
       <div class="card-body">
 
@@ -39,13 +45,15 @@
         <!-- Description -->
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea class="form-control" rows="5" id="description" name="description" placeholder="What is this post about"></textarea>
+          <div id="descriptionEditor"></div>
+          <!-- <textarea class="form-control" rows="5" id="description" name="description" placeholder="What is this post about"></textarea> -->
         </div>
 
         <!-- Content -->
         <div class="form-group">
           <label for="content">Content</label>
-          <textarea class="form-control" rows="8" id="content" name="content" placeholder="Content..."></textarea>
+          <div id="contentEditor"></div>
+          <!-- <textarea class="form-control" rows="8" id="content" name="content" placeholder="Content..."></textarea> -->
         </div>
 
         <!-- Category -->
@@ -83,15 +91,47 @@
       <div class="card-footer">
         <button type="submit" class="btn btn-primary">Confirm</button>
       </div>
+
+      <script>
+        // Инициализация редакторов
+        const descriptionEditor = new toastui.Editor({
+          el: document.querySelector('#descriptionEditor'),
+          height: '300px',
+          initialEditType: 'markdown',
+          previewStyle: 'vertical',
+        });
+
+        const contentEditor = new toastui.Editor({
+          el: document.querySelector('#contentEditor'),
+          height: '500px',
+          initialEditType: 'markdown',
+          previewStyle: 'vertical',
+        });
+
+        // Обработка отправки формы
+        const form = document.getElementById('postForm');
+        form.addEventListener('submit', handleFormSubmit);
+
+        async function sendData(data) {
+          return await fetch(form.action, {
+            method: form.method,
+            body: data,
+          })
+        }
+
+        async function handleFormSubmit(event) {
+          event.preventDefault();
+          formData = new FormData(form);
+          formData.append('description', descriptionEditor.getMarkdown());
+          formData.append('content', contentEditor.getMarkdown());
+          console.log(Array.from(formData.entries()))
+          const response = await sendData(formData)
+          console.log(response)
+        }
+      </script>
+
     </form>
   </div>
 </section>
-<!-- /.content -->
-<!-- </div> -->
-<!-- /.content-wrapper -->
-@endsection
 
-<!-- 
-<script>
-  alert("<?php echo  basename($_SERVER['PHP_SELF']); ?>");
-</script> -->
+@endsection

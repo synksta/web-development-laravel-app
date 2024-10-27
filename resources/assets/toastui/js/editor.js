@@ -1,7 +1,6 @@
+// Пример использования функции
 const editorElement = document.querySelector("#editor");
-
 if (editorElement) {
-    console.log("editor");
     const editor = new toastui.Editor({
         el: editorElement,
         height: "500px",
@@ -9,5 +8,7 @@ if (editorElement) {
         previewStyle: "vertical",
     });
 
-    editor.getMarkdown();
+    editor.on("change", async () => {
+        console.log(processedMarkdown); // Здесь вы можете отправить обработанный текст в базу данных
+    });
 }

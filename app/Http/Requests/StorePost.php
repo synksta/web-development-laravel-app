@@ -24,7 +24,7 @@ class StorePost extends FormRequest
         return [
             'category_id' => 'required|integer|exists:categories,id',
             'title' => 'required',
-            'description' => 'required',
+            // 'description' => 'required',
             'content' => 'required',
             'thumbnail' => 'nullable|image',
         ];

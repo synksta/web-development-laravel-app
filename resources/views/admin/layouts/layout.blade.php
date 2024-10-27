@@ -11,6 +11,7 @@
   <!-- Font Awesome -->
   <!-- <link rel="stylesheet" href="../../../public/assets/css/admin.css"> -->
   <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -97,7 +98,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="{{ asset('assets/admin/img/user3-128x128.jpg') }}') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="{{ asset('assets/admin/img/user3-128x128.jpg') }}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -327,9 +328,9 @@
   <!-- ./wrapper -->
 
   <!-- Все скрипты -->
+
   <script src="{{mix('assets/admin/js/script.js')}}"></script>
   <script src="{{mix('assets/admin/js/manifest.js')}}"></script>
-
   <script>
     $('.nav-sidebar a').each(function() {
       let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
