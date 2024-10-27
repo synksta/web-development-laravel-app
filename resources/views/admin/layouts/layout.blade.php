@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <!-- <link rel="stylesheet" href="../../../public/assets/css/admin.css"> -->
-  <link rel="stylesheet" href="{{asset('assets/admin/css/admin.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/admin/css/style.css')}}">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -327,7 +327,8 @@
   <!-- ./wrapper -->
 
   <!-- Все скрипты -->
-  <script src="{{asset('assets/admin/js/admin.js')}}"></script>
+  <script src="{{mix('assets/admin/js/script.js')}}"></script>
+  <script src="{{mix('assets/admin/js/manifest.js')}}"></script>
 
   <script>
     $('.nav-sidebar a').each(function() {

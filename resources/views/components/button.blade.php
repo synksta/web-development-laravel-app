@@ -1,0 +1,1 @@
+<a href="{{ route($route) }}" class="my-0 mx-2 btn {{ $class }} btn-block">{{ $label }}</a>

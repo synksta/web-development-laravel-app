@@ -1,6 +1,7 @@
 {
-    "/assets/admin/css/admin.css": "/assets/admin/css/admin.css",
-    "/assets/admin/js/admin.js": "/assets/admin/js/admin.js",
+    "/assets/admin/js/script.js": "/assets/admin/js/script.js",
+    "/assets/admin/js/manifest.js": "/assets/admin/js/manifest.js",
+    "/assets/admin/css/style.css": "/assets/admin/css/style.css",
     "/assets/admin/webfonts/fa-brands-400.eot": "/assets/admin/webfonts/fa-brands-400.eot",
     "/assets/admin/webfonts/fa-brands-400.svg": "/assets/admin/webfonts/fa-brands-400.svg",
     "/assets/admin/webfonts/fa-brands-400.ttf": "/assets/admin/webfonts/fa-brands-400.ttf",

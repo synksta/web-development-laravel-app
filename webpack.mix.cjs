@@ -31,19 +31,19 @@ mix.styles(
         "resources/assets/admin/plugins/select2/css/select2.min.css",
         "resources/assets/admin/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css",
     ],
-    "public/assets/admin/css/admin.css"
+    "public/assets/admin/css/style.css"
 );
 
-mix.scripts(
+mix.js(
     [
         "resources/assets/admin/plugins/jquery/jquery.min.js",
         "resources/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js",
         "resources/assets/admin/js/adminlte.min.js",
-        "resources/assets/admin/js/demo.js",
         "resources/assets/admin/plugins/select2/js/select2.full.min.js",
+        "resources/assets/admin/js/demo.js",
     ],
-    "public/assets/admin/js/admin.js"
-);
+    "public/assets/admin/js/script.js"
+).extract();
 
 mix.copyDirectory(
     "resources/assets/admin/plugins/fontawesome-free/webfonts",

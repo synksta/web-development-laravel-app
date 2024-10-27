@@ -52,10 +52,10 @@
               <td>{{ $post->tags->pluck('title')->join(', ') }}</td>
               <td>{{ $post->created_at }}</td>
               <td>
-                <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-info btn-sm float-left mr-1`">
+                <a href="{{ route('admin.posts.edit', ['post' => $post->id]) }}" class="btn btn-info btn-sm float-left mr-1`">
                   <i class="fas fa-pencil-alt"></i>
                 </a>
-                <form action="{{ route('posts.destroy', ['post' => $post->id]) }}" method="post" class="float-left ">
+                <form action="{{ route('admin.posts.destroy', ['post' => $post->id]) }}" method="post" class="float-left ">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">
