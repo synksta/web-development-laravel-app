@@ -13,6 +13,9 @@ Route::get('/', function () {
     // return "это главная";
 })->name('home');
 
+Route::redirect('/home', '/');
+Route::redirect('/main', '/');
+
 Route::middleware(AdminMiddleware::class)
     ->prefix('admin')
     ->namespace('App\Http\Controllers\Admin')
