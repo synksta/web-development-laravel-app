@@ -1,5 +1,5 @@
 const mix = require("laravel-mix");
-
+// ADMIN
 mix.styles(
     [
         "resources/assets/admin/plugins/fontawesome-free/css/all.min.css",
@@ -24,6 +24,38 @@ mix.js(
     ],
     "public/assets/admin/js/script.js"
 ).extract();
+
+//MARKEDIA
+mix.styles(
+    [
+        "resources/assets/markedia/css/bootstrap.css",
+        "resources/assets/markedia/css/font-awesome.min.css",
+        "resources/assets/markedia/css/style.css",
+        "resources/assets/markedia/css/animate.css",
+        "resources/assets/markedia/css/responsive.css",
+        "resources/assets/markedia/css/colors.css",
+        "resources/assets/markedia/css/version/marketing.css",
+    ],
+    "public/assets/markedia/css/style.css"
+);
+
+mix.js(
+    [
+        "resources/assets/markedia/js/jquery.min.js",
+        "resources/assets/markedia/js/tether.min.js",
+        "resources/assets/markedia/js/animate.js",
+        "resources/assets/markedia/js/bootstrap.js",
+        "resources/assets/markedia/js/custom.js",
+        // "resources/assets/markedia/js/bootstrap.min.js",
+        // "resources/assets/markedia/js/carousel.js",
+        // "resources/assets/markedia/js/food-map.js",
+        // "resources/assets/markedia/js/garden-map.js",
+    ],
+    "public/assets/markedia/js/script.js"
+)
+    .copy("resources/assets/markedia/fonts", "public/assets/markedia/fonts")
+    .copy("resources/assets/markedia/images", "public/assets/markedia/images")
+    .copy("resources/assets/markedia/upload", "public/assets/markedia/upload");
 
 mix.copyDirectory(
     "resources/assets/admin/plugins/fontawesome-free/webfonts",

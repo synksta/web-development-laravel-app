@@ -7,14 +7,21 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Blog\MainController as BlogMainController;
 
-Route::get('/', function () {
-    return view('welcome');
-    // return "это главная";
-})->name('home');
+// Blog
+// Route::get('/', function () {
+//     return view('welcome');
+//     // return "это главная";
+// })->name('home');
 
-Route::redirect('/home', '/');
-Route::redirect('/main', '/');
+Route::get('/home', [BlogMainController::class, 'index'])->name('home');
+
+
+Route::redirect('/', '/home');
+Route::redirect('/main', '/home');
+
+// Admin
 
 Route::middleware(AdminMiddleware::class)
     ->prefix('admin')
