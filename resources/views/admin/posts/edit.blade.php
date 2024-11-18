@@ -4,6 +4,8 @@
 <!-- Content Wrapper. Contains page content -->
 <!-- <div class="content-wrapper"> -->
 <!-- Content Header (Page header) -->
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
 <section class="content-header">
   <div class="container-fluid">
     <div class="row mb-2">
@@ -26,7 +28,7 @@
     <div class="card-header">
       <h3 class="card-title">Post "{{ $post -> title }}"</h3>
     </div>
-    <form role="form" method="post" action="{{ route('admin.posts.update', ['post' => $post->id]) }}" enctype="multipart/form-data">
+    <form id="postForm" role="form" method="post" action="{{ route('admin.posts.update', ['post' => $post->id]) }}" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <div class="card-body">
@@ -40,13 +42,16 @@
         <!-- Description -->
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea class="form-control" rows="5" id="description" name="description" placeholder="What is this post about">{{ $post->description }}</textarea>
+          <!-- <textarea class="form-control" rows="5" id="description" name="description" placeholder="What is this post about">{{ $post->description }}</textarea> -->
+          <div id="descriptionEditor" name="description"></div>
         </div>
 
         <!-- Content -->
         <div class="form-group">
           <label for="content">Content</label>
-          <textarea class="form-control" rows="8" id="content" name="content" placeholder="Content...">{{ $post->content }}</textarea>
+          <!-- <textarea class="form-control" rows="8" id="content" name="content" placeholder="Content...">{{ $post->content }}</textarea> -->
+          <div id="contentEditor" name="description"></div>
+
         </div>
 
         <!-- Category -->
@@ -85,6 +90,55 @@
       <div class="card-footer">
         <button type="submit" class="btn btn-primary">Confirm</button>
       </div>
+
+      <script>
+        // Инициализация редакторов
+        const descriptionEditor = new toastui.Editor({
+          el: document.querySelector('#descriptionEditor'),
+          height: '300px',
+          initialEditType: 'markdown',
+          previewStyle: 'vertical',
+        });
+
+        const contentEditor = new toastui.Editor({
+          el: document.querySelector('#contentEditor'),
+          height: '500px',
+          initialEditType: 'markdown',
+          previewStyle: 'vertical',
+        });
+
+        descriptionEditor.insertText('{{ $post->description }}');
+        contentEditor.insertText('{{ $post->content }}');
+
+        // Обработка отправки формы
+        const form = document.getElementById('postForm');
+
+        form.addEventListener('submit', async function(event) {
+          event.preventDefault();
+          const formData = new FormData(form);
+          formData.append('description', descriptionEditor.getMarkdown());
+          formData.append('content', contentEditor.getMarkdown());
+
+          try {
+            const response = await fetch(form.action, {
+              method: 'POST', // Используем POST, так как Laravel обрабатывает PUT через метод spoofing
+              body: formData,
+            });
+
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            const headers = response.headers;
+            console.log(result); // Обработка ответа сервера
+            window.location.href = headers.get('Location');
+            // Здесь можно добавить редирект или уведомление об успешном обновлении
+          } catch (error) {
+            console.error('Ошибка:', error);
+          }
+        });
+      </script>
     </form>
   </div>
 </section>

@@ -34,6 +34,7 @@ Log::info("hi");
     </div>
     <form id="postForm" role="form" method="post" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
       @csrf
+      @method('POST')
       <div class="card-body">
 
         <!-- Title -->
@@ -45,14 +46,14 @@ Log::info("hi");
         <!-- Description -->
         <div class="form-group">
           <label for="description">Description</label>
-          <div id="descriptionEditor"></div>
+          <div id="descriptionEditor" name="description"></div>
           <!-- <textarea class="form-control" rows="5" id="description" name="description" placeholder="What is this post about"></textarea> -->
         </div>
 
         <!-- Content -->
         <div class="form-group">
           <label for="content">Content</label>
-          <div id="contentEditor"></div>
+          <div id="contentEditor" name="content"></div>
           <!-- <textarea class="form-control" rows="8" id="content" name="content" placeholder="Content..."></textarea> -->
         </div>
 
@@ -108,6 +109,9 @@ Log::info("hi");
           previewStyle: 'vertical',
         });
 
+
+
+
         // Обработка отправки формы
         const form = document.getElementById('postForm');
         form.addEventListener('submit', handleFormSubmit);
@@ -125,7 +129,17 @@ Log::info("hi");
           formData.append('description', descriptionEditor.getMarkdown());
           formData.append('content', contentEditor.getMarkdown());
           console.log(Array.from(formData.entries()))
-          const response = await sendData(formData)
+          try {
+            const response = await sendData(formData)
+            if (response.ok) {
+              window.location.href = response.headers.get('Location');
+            } else {
+              const responseJson = await response.json();
+              console.info("Error: ", responseJson.message);
+            }
+          } catch (error) {
+            console.error("Error: ", error);
+          }
           console.log(response)
         }
       </script>

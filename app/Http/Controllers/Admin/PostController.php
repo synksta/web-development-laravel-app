@@ -48,26 +48,37 @@ class PostController extends Controller
         // dd($data);
         $post = Post::create($data);
 
-        // $data['description'] = Post::uploadPostImages($post, 'description');
+        // $data['description'] = Post::uploadPostImagesFromMarkdown($post->id, $post->description);
         // $data['content'] = Post::uploadPostImages($post, 'content');
-
         $post->update($data);
+
 
         // dd($data['thumbnail']);
 
         $post->tags()->sync($request->tags);
 
-        Log::info($data);
 
-        return response()->json([
-            'id' => $post->id,
-            'title' => $data['title'],
-            'description' => $data['description'],
-            'content' => $data['content'],
-            'category_id' => $data['category_id'],
-            'tags' => $data['tags'],
-            'thumbnail' => $data['thumbnail'],
-        ], 200);
+        // Log::info("wtf");
+        // Log::info($data);
+
+        // redirect(route('admin.posts.index'))->with('success', 'Post created successfully');
+        session()->flash('success', 'Post ' . $post->title . ' ' . $post->id . ' created successfully');
+
+        return response()
+            ->json([
+                'id' => $post->id,
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'content' => $data['content'],
+                'category_id' => $data['category_id'],
+                'tags' => $data['tags'],
+                'thumbnail' => $data['thumbnail'],
+            ], 200)
+            ->withHeaders([
+                'Content-Type' => 'application/json',
+                'Location' => route('admin.posts.index'),
+            ]);
+
 
         // if ($request->ajax()) {
         //     return response()->json(['success' => true, 'message' => 'Post created successfully']);
@@ -111,7 +122,48 @@ class PostController extends Controller
 
         $post->tags()->sync($request->tags);
 
-        return redirect(route('posts.index'))->with('success', 'Post updated successfully');
+        // return redirect(route('admin.posts.index'))->with('success', 'Post updated successfully');
+
+        // $data = $request->all();
+
+
+        // dd($data);
+
+        // $data['thumbnail'] = Post::uploadThumbnail($request, new Post());
+
+        // dd($data);
+        // $post = Post::create($data);
+
+        // $data['description'] = Post::uploadPostImagesFromMarkdown($post->id, $post->description);
+        // $data['content'] = Post::uploadPostImages($post, 'content');
+        // $post->update($data);
+
+
+        // dd($data['thumbnail']);
+
+        // $post->tags()->sync($request->tags);
+
+
+        // Log::info("wtf");
+        // Log::info($data);
+
+        // redirect(route('admin.posts.index'))->with('success', 'Post created successfully');
+        session()->flash('success', 'Post ' . $post->title . ' ' . $post->id . ' updated successfully');
+
+        return response()
+            ->json([
+                'id' => $post->id,
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'content' => $data['content'],
+                'category_id' => $data['category_id'],
+                'tags' => $data['tags'],
+                'thumbnail' => $data['thumbnail'],
+            ], 200)
+            ->withHeaders([
+                'Content-Type' => 'application/json',
+                'Location' => route('admin.posts.index'),
+            ]);
     }
 
     /**
@@ -125,6 +177,6 @@ class PostController extends Controller
             Storage::delete($post->thumbnail);
         }
         $post->delete();
-        return redirect(route('posts.index'))->with('success', 'Post deleted successfully');
+        return redirect(route('admin.posts.index'))->with('success', 'Post deleted successfully');
     }
 }

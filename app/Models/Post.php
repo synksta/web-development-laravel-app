@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -44,57 +45,92 @@ class Post extends Model
             ->saveSlugsTo('slug');
     }
 
-    public static function uploadPostImages($post, $attributeName)
+    public static function uploadPostImagesFromMarkdown($postId, $markdownText)
     {
-        $postId = $post->id;
+        // Путь к директории для сохранения изображений
+        $directory = "images/posts/{$postId}";
 
-        $uploadPath = config('filesystems.disks.public.root') . "/images/posts/" . $postId;
+        // Создаем директорию, если она не существует
+        if (!Storage::exists($directory)) {
+            Storage::makeDirectory($directory);
+        }
 
-        // Парсим изображения из Markdown текста
-        $markdownText = $post->data[$attributeName];
+        // Регулярное выражение для поиска изображений в формате Base64
+        $pattern = '/!\[\]\((data:image\/(jpeg|png);base64,([A-Za-z0-9\/+]+=*)\)/';
 
-        $imageRegex = '/data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+\/=]+)/g';
-
-        preg_match_all($imageRegex, $markdownText, $matches);
-
-        // Массив для хранения путей новых изображений
-        $newImagesPaths = [];
-
-        foreach ($matches[0] as $base64Image) {
-            // Извлекаем данные изображения
-            list($type, $data) = explode(';', $base64Image);
-            list(, $data) = explode(',', $data);
-
-            // Декодируем base64
-            $imageData = base64_decode($data);
+        // Функция замены для обработки найденных изображений
+        $markdownText = preg_replace_callback($pattern, function ($matches) use ($directory) {
+            // Декодируем Base64 строку
+            $imageData = base64_decode($matches[3]);
 
             // Генерируем уникальное имя файла
-            $fileName = uniqid() . '.webp'; // Или другой формат по вашему выбору
+            $filename = uniqid() . '.webp';
 
-            // Сохраняем изображение
-            file_put_contents("$uploadPath/$fileName", $imageData);
+            // Сохраняем изображение в формате WebP
+            $image = imagecreatefromstring($imageData);
+            if ($image !== false) {
+                imagepalettetotruecolor($image);
+                imagewebp($image, storage_path("app/{$directory}/{$filename}"));
+                imagedestroy($image);
 
-            // Добавляем путь к новому изображению в массив
-            $newImagesPaths[] = asset("uploads/images/posts/$postId/$fileName");
-
-            // Заменяем ссылку в Markdown на новую
-            $markdownText = str_replace($base64Image, end($newImagesPaths), $markdownText);
-        }
-
-        // Получаем список существующих файлов в директории
-        $existingFiles = Storage::files("public/uploads/images/posts/$postId"); // Укажите правильный путь
-
-        // Удаляем ненужные файлы
-        foreach ($existingFiles as $file) {
-            if (!in_array(asset($file), $newImagesPaths)) {
-                Storage::delete($file); // Удаляем файл из хранилища
+                // Возвращаем путь к изображению для замены в Markdown
+                return "![](/storage/{$directory}/{$filename})";
             }
-        }
 
-        dd($markdownText, $newImagesPaths);
+            return $matches[0]; // Если не удалось создать изображение, возвращаем оригинал
+        }, $markdownText);
 
-        return $markdownText; // Возвращаем обновленный текст Markdown
+        return $markdownText;
     }
+
+    // public static function uploadPostImagesFromMarkdown($postId, $markdownText)
+    // {
+
+    //     // return $postId
+    //     $uploadPath = config('filesystems.disks.public.root') . "/images/posts/" . $postId;
+
+    //     $imageRegex = '/data:image\/(jpeg|png|webp);base64,([A-Za-z0-9+\/=]+)/g';
+
+    //     preg_match_all($imageRegex, $markdownText, $matches);
+
+    //     // Массив для хранения путей новых изображений
+    //     $newImagesPaths = [];
+
+    //     foreach ($matches[0] as $base64Image) {
+    //         // Извлекаем данные изображения
+    //         list($type, $data) = explode(';', $base64Image);
+    //         list(, $data) = explode(',', $data);
+
+    //         // Декодируем base64
+    //         $imageData = base64_decode($data);
+
+    //         // Генерируем уникальное имя файла
+    //         $fileName = uniqid() . '.webp'; // Или другой формат по вашему выбору
+
+    //         // Сохраняем изображение
+    //         file_put_contents("$uploadPath/$fileName", $imageData);
+
+    //         // Добавляем путь к новому изображению в массив
+    //         $newImagesPaths[] = asset("uploads/images/posts/$postId/$fileName");
+
+    //         // Заменяем ссылку в Markdown на новую
+    //         $markdownText = str_replace($base64Image, end($newImagesPaths), $markdownText);
+    //     }
+
+    //     // Получаем список существующих файлов в директории
+    //     $existingFiles = Storage::files("public/uploads/images/posts/$postId"); // Укажите правильный путь
+
+    //     // Удаляем ненужные файлы
+    //     foreach ($existingFiles as $file) {
+    //         if (!in_array(asset($file), $newImagesPaths)) {
+    //             Storage::delete($file); // Удаляем файл из хранилища
+    //         }
+    //     }
+
+    //     dd($markdownText, $newImagesPaths);
+
+    //     return $markdownText; // Возвращаем обновленный текст Markdown
+    // }
 
     public static function uploadThumbnail($request, $post)
     {

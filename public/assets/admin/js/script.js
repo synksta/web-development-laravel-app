@@ -10569,8 +10569,10 @@ function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyri
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 // Пример использования функции
+
 var editorElement = document.querySelector("#editor");
 if (editorElement) {
+  alert("works");
   var editor = new toastui.Editor({
     el: editorElement,
     height: "500px",
@@ -10581,7 +10583,7 @@ if (editorElement) {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          console.log(processedMarkdown); // Здесь вы можете отправить обработанный текст в базу данных
+          console.log(editor.getMarkdown()); // Здесь вы можете отправить обработанный текст в базу данных
         case 1:
         case "end":
           return _context.stop();
