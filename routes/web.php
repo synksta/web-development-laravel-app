@@ -16,6 +16,7 @@ use App\Http\Controllers\Blog\MainController as BlogMainController;
 // })->name('home');
 
 Route::get('/home', [BlogMainController::class, 'index'])->name('home');
+Route::get('/article', [BlogMainController::class, 'article'])->name('posts.single');
 
 
 Route::redirect('/', '/home');

@@ -43,19 +43,36 @@ mix.js(
     [
         "resources/assets/markedia/js/jquery.min.js",
         "resources/assets/markedia/js/tether.min.js",
+        "resources/assets/markedia/js/bootstrap.min.js",
         "resources/assets/markedia/js/animate.js",
-        "resources/assets/markedia/js/bootstrap.js",
         "resources/assets/markedia/js/custom.js",
-        // "resources/assets/markedia/js/bootstrap.min.js",
+        // "resources/assets/markedia/js/bootstrap.js",
         // "resources/assets/markedia/js/carousel.js",
         // "resources/assets/markedia/js/food-map.js",
         // "resources/assets/markedia/js/garden-map.js",
     ],
     "public/assets/markedia/js/script.js"
-)
-    .copy("resources/assets/markedia/fonts", "public/assets/markedia/fonts")
-    .copy("resources/assets/markedia/images", "public/assets/markedia/images")
-    .copy("resources/assets/markedia/upload", "public/assets/markedia/upload");
+).extract();
+mix.copyDirectory(
+    "resources/assets/markedia/fonts",
+    "public/assets/markedia/fonts"
+);
+mix.copyDirectory(
+    "resources/assets/markedia/images",
+    "public/assets/markedia/images"
+);
+mix.copyDirectory(
+    "resources/assets/markedia/upload",
+    "public/assets/markedia/upload"
+);
+mix.copyDirectory(
+    "resources/assets/markedia/js",
+    "public/assets/markedia/js/scripts"
+);
+mix.copyDirectory(
+    "resources/assets/markedia/css",
+    "public/assets/markedia/css/styles"
+);
 
 mix.copyDirectory(
     "resources/assets/admin/plugins/fontawesome-free/webfonts",

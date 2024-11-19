@@ -11,4 +11,10 @@ class MainController extends Controller
     {
         return view('blog.index');
     }
+
+    public function article()
+    {
+        return view('blog.article');
+        // return "это статья";
+    }
 }
