@@ -10,13 +10,14 @@ use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Blog\MainController as BlogMainController;
 
 // Blog
-// Route::get('/', function () {
-//     return view('welcome');
-//     // return "это главная";
-// })->name('home');
+Route::get('/home', function () {
+    return view('welcome');
+    // return "это главная";
+})->name('home');
 
-Route::get('/home', [BlogMainController::class, 'index'])->name('home');
-Route::get('/article', [BlogMainController::class, 'article'])->name('posts.single');
+Route::get('/blog', [BlogMainController::class, 'index'])->name('blog');
+Route::get('/article/{slug}', [BlogMainController::class, 'article'])->name('posts.single');
+Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.single');
 
 
 Route::redirect('/', '/home');

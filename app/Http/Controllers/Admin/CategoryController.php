@@ -37,7 +37,7 @@ class CategoryController extends Controller
         // ]);
         Category::create($request->all());
         // $request->session()->flash('success', 'Category created successfully');
-        return redirect(route('categories.index'))->with('success', 'Category created successfully');
+        return redirect(route('admin.categories.index'))->with('success', 'Category created successfully');
     }
 
     /**
@@ -59,7 +59,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update($request->all());
         // $category->slug = null;
-        return redirect(route('categories.index'))->with('success', 'Category updated successfully');
+        return redirect(route('admin.categories.index'))->with('success', 'Category updated successfully');
 
         //
     }
@@ -71,7 +71,11 @@ class CategoryController extends Controller
     {
         // dd(__METHOD__);
         $category = Category::findOrFail($id);
+
+        if ($category->posts->count()) {
+            return redirect(route('admin.categories.index'))->with('error', 'Category has posts');
+        }
         $category->delete();
-        return redirect(route('categories.index'))->with('success', 'Category deleted successfully');
+        return redirect(route('admin.categories.index'))->with('success', 'Category deleted successfully');
     }
 }

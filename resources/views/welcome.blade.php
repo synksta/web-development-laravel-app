@@ -56,9 +56,7 @@
         </div>
     </nav>
 
-    <!-- 
-    <script src="{{mix('assets/admin/js/script.js')}}"></script>
-    <script src="{{mix('assets/admin/js/manifest.js')}}"></script> -->
+
 </body>
 
 </html>

@@ -43,6 +43,7 @@ class PostController extends Controller
 
         // dd($data);
 
+        // $data['thumbnail'] = Null;
         $data['thumbnail'] = Post::uploadThumbnail($request, new Post());
 
         // dd($data);
@@ -116,7 +117,13 @@ class PostController extends Controller
 
         $data = $request->all();
 
-        $data['thumbnail'] = Post::uploadThumbnail($request, $post);
+        Log::info($data);
+
+        if ($file = Post::uploadThumbnail($request, $post)) {
+            $data['thumbnail'] = $file;
+        } else {
+            $data['thumbnail'] = $post->thumbnail;
+        }
 
         $post->update($data);
 

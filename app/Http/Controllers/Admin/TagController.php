@@ -37,7 +37,7 @@ class TagController extends Controller
 
         Tag::create($request->all());
         // $request->session()->flash('success', 'Category created successfully');
-        return redirect(route('tags.index'))->with('success', 'Tag created successfully');
+        return redirect(route('admin.tags.index'))->with('success', 'Tag created successfully');
     }
 
     /**
@@ -59,7 +59,7 @@ class TagController extends Controller
         $tag = Tag::findOrFail($id);
         $tag->update($request->all());
         // $category->slug = null;
-        return redirect(route('tags.index'))->with('success', 'Tag updated successfully');
+        return redirect(route('admin.tags.index'))->with('success', 'Tag updated successfully');
 
         //
     }
@@ -70,8 +70,13 @@ class TagController extends Controller
     public function destroy(string $id)
     {
         // dd(__METHOD__);
-        $category = Tag::findOrFail($id);
-        $category->delete();
-        return redirect(route('tags.index'))->with('success', 'Tag deleted successfully');
+        $tag = Tag::findOrFail($id);
+
+        if ($tag->posts->count()) {
+            return redirect(route('admin.tags.index'))->with('error', 'Tag has posts');
+        }
+
+        $tag->delete();
+        return redirect(route('admin.tags.index'))->with('success', 'Tag deleted successfully');
     }
 }
