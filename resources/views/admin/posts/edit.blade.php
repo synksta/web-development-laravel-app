@@ -107,8 +107,9 @@
           previewStyle: 'vertical',
         });
 
-        descriptionEditor.insertText('{{ $post->description }}');
-        contentEditor.insertText('{{ $post->content }}');
+        descriptionEditor.setHTML('{!! html_entity_decode($post -> description) !!}');
+
+        contentEditor.setHTML('{!! html_entity_decode($post -> content) !!}');
 
         // Обработка отправки формы
         const form = document.getElementById('postForm');
@@ -116,8 +117,8 @@
         form.addEventListener('submit', async function(event) {
           event.preventDefault();
           const formData = new FormData(form);
-          formData.append('description', descriptionEditor.getMarkdown());
-          formData.append('content', contentEditor.getMarkdown());
+          formData.append('description', descriptionEditor.getHTML());
+          formData.append('content', contentEditor.getHTML());
 
           try {
             const response = await fetch(form.action, {

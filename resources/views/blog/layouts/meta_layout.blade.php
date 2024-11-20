@@ -60,18 +60,18 @@
       </div><!-- end container-fluid -->
     </header><!-- end market-header -->
 
+    @yield('page-title')
 
-    @yield('header')
-
-    <section class="section lb @if(!Request::is('/main')) m3rem @endif page-wrapper ">
+    <section class="section lb page-wrapper ">
       <div class="container">
         <div class="row">
+          <div class="d-none d-lg-block col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            @include('blog.partials.sidebar')
+          </div><!-- end col -->
           <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
             @yield('content')
-
           </div><!-- end col -->
-
-          <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+          <div class="d-block d-lg-none col-lg-4 col-md-12 col-sm-12 col-xs-12">
             @include('blog.partials.sidebar')
           </div><!-- end col -->
         </div><!-- end row -->

@@ -16,7 +16,10 @@ class MainController extends Controller
 
     public function article($slug)
     {
-        return view('blog.article');
+        $post = Post::where('slug', $slug)->firstOrFail();
+        $post->views++;
+        $post->update();
+        return view('blog.article', compact('post'));
         // return "это статья";
     }
 }

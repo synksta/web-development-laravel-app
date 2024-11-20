@@ -126,8 +126,8 @@ Log::info("hi");
         async function handleFormSubmit(event) {
           event.preventDefault();
           formData = new FormData(form);
-          formData.append('description', descriptionEditor.getMarkdown());
-          formData.append('content', contentEditor.getMarkdown());
+          formData.append('description', descriptionEditor.getHTML());
+          formData.append('content', contentEditor.getHTML());
           console.log(Array.from(formData.entries()))
           try {
             const response = await sendData(formData)
