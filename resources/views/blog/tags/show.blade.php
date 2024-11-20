@@ -41,13 +41,7 @@
       </div>
 
       <div class="blog-meta big-meta text-center">
-        <div class="post-sharing">
-          <ul class="list-inline">
-            <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-            <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-            <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-          </ul>
-        </div>
+
         <h4><a href="{{route('posts.single', ['slug' => $post->slug])}}" title="">{{$post->title}}</a></h4>
         {!! html_entity_decode($post->description) !!}
         <small><a href="{{route('categories.single',['slug' => $post->category->slug])}}" title="">{{ $post->category->title }}</a></small>

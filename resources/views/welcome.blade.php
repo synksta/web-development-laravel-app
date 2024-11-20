@@ -56,6 +56,13 @@
         </div>
     </nav>
 
+    <div class="container mt-5 ">
+        <div class="row">
+            <div class="col-12  d-flex justify-content-center">
+                <x-button route="blog" label="To blog!" />
+            </div>
+        </div>
+    </div>
 
 </body>
 

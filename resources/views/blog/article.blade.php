@@ -1,4 +1,4 @@
-@extends('blog.layouts.layout')
+@extends('blog.layouts.meta_layout')
 
 @section('title', "SynkstaWWW |" .$post->title)
 

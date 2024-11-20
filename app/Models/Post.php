@@ -139,7 +139,6 @@ class Post extends Model
         // Отладка: выводим все данные запроса
         // dd($request->all(), $request->hasFile('thumbnail')); // Проверяем наличие файла
 
-
         $result = $post->thumbnail;
         if ($request->hasFile('thumbnail')) {
             if ($post->thumbnail) {
@@ -164,6 +163,13 @@ class Post extends Model
     public function getPostDate()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)->format('d F, Y');
+    }
+
+    public function scopeLike($query, $s)
+    {
+        $searchTerm = strtolower(trim($s));
+
+        return $query->whereRaw('LOWER(title) LIKE ?', ["%{$searchTerm}%"])->orWhereRaw('LOWER(description) LIKE ?', ["%{$searchTerm}%"]);
     }
 
     use HasFactory;

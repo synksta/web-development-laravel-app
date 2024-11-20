@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Blog\CategoryController as BlogCategoryController;
+use App\Http\Controllers\Blog\SearchController;
 use App\Http\Controllers\Blog\TagController as BlogTagController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
@@ -21,6 +22,7 @@ Route::get('/blog', [BlogMainController::class, 'index'])->name('blog');
 Route::get('/article/{slug}', [BlogMainController::class, 'article'])->name('posts.single');
 Route::get('/category/{slug}', [BlogCategoryController::class, 'show'])->name('categories.single');
 Route::get('/tag/{slug}', [BlogTagController::class, 'show'])->name('tags.single');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::redirect('/', '/home');
 Route::redirect('/main', '/home');

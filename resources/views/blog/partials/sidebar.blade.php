@@ -1,4 +1,5 @@
 <div class="sidebar">
+  @if ($popular_posts->count())
   <div class="widget">
     <h2 class="widget-title">Popular Posts</h2>
     <div class="blog-list-widget">
@@ -11,13 +12,14 @@
             <small>{{$post->getPostDate()}}</small>
             <small><i class="fa fa-eye"></i>{{$post->views}}</small>
           </div>
-          @endforeach
         </a>
-
+        @endforeach
       </div>
     </div><!-- end blog-list -->
+    @endif
   </div><!-- end widget -->
 
+  @if ($cats->count())
   <div class="widget">
     <h2 class="widget-title">Categories</h2>
     <div class="link-widget">
@@ -28,4 +30,5 @@
       </ul>
     </div><!-- end link-widget -->
   </div><!-- end widget -->
+  @endif
 </div><!-- end sidebar -->
